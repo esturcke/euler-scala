@@ -9,6 +9,12 @@ package euler
  * we get 3, 5, 6 and 9. The sum of these multiples is 23.
  *
  * Find the sum of all the multiples of 3 or 5 below 1000.
+ *
+ * '''Solution'''
+ *
+ * The solution is to take the sum of multiples of 3
+ * and multiples of 5 and then subtract multiples
+ * and both 3 and 5, or 15.
  */
 
 object Problem1 extends Problem {
