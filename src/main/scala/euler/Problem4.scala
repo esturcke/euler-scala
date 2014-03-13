@@ -36,19 +36,6 @@ object Problem4 extends Problem {
   private def isPalindrome(s: String)       = s == s.reverse
   private def isPalindrome(n: Int): Boolean = isPalindrome(n.toString)
 
-  /*
-   * This version is faster for small values, but blows the stack for larger values
-   *
-  def products(a: Int, b: Int): Stream[Int] = {
-    def merge(a: Stream[Int], b: Stream[Int]): Stream[Int] = (a, b) match {
-      case (Stream.Empty, _) => b
-      case (_, Stream.Empty) => a
-      case (x #:: xs, y #:: ys) => if (x > y) x #:: merge(xs, b) else y #:: merge(a, ys)
-    }
-    (b * b) #:: (if (a == b) Stream.empty else merge(Stream.range(b - 1, a - 1, -1) map { _ * b }, products(a, b - 1)))
-  }
-  */
-
   def products(min: Int, max: Int): Stream[Int] = {
     def find(min: Int, max: Int, q: SortedSet[Int]): Stream[Int] = {
       if      (min > max)                       q.toStream
