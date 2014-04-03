@@ -12,4 +12,13 @@ libraryDependencies ++= Seq(
   "org.scala-lang" %  "scala-reflect" % scalaVersion.value
 )
 
+
+
 testOptions in Test += Tests.Argument("-oD")
+
+val setup = inputKey[Unit]("Setup a new problem")
+
+setup := {
+  //val args: Seq[String] = Def.spaceDelimited("<arg>").parsed
+  //roblem.setup(args(0).toInt)
+}
