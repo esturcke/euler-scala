@@ -1,12 +1,13 @@
 package euler.math
 
+import euler.math.Misc.sq
+
 /**
  * Streams of primes
  */
 
 object Prime {
   
-  private def sq(n: Long) = n * n
   private def from(n: Long, Δ: Long = 1) = Stream.iterate(n) { _ + Δ }
 
   lazy val primes: Stream[Long] = 2 #:: (
@@ -22,6 +23,11 @@ object Prime {
       }
     }
     find(n, primes, Nil)
+  }
+
+  def factorCount(n: Long) = {
+    val sqrt = math.sqrt(n).toLong
+    2 * ((1L to sqrt) filter { n % _ == 0 }).length - (if (n == sqrt * sqrt) 1 else 0)
   }
 
 }

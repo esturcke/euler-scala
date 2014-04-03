@@ -12,4 +12,8 @@ object Misc {
 
   def lcm(ns: Seq[Long]): Long = ns reduce lcm
 
+  def sq(n: Long) = n * n
+
+  val triangleNumbers: Stream[Long] = 1 #:: triangleNumbers.zip(Stream.from(2)).map { n => n._1 + n._2 }
+  
 }
