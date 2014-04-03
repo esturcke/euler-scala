@@ -3,6 +3,7 @@ package euler
 import scala.collection.JavaConversions._
 import scala.reflect.runtime.universe
 import org.jsoup.Jsoup
+import euler.util.Template
 
 /**
  */
@@ -44,13 +45,25 @@ object Problem {
 
   def uri(n: Int) = s"https://projecteuler.net/problem=${n}"
 
-  def setup(n: Int) = {
-    val doc         = Jsoup.connect(uri(n)).get
-    val title       = doc.select("#content h2").first.text
-    val n           = doc.select("#content h3").first.text.substring(8).toInt
-    val description = doc.select("#content .problem_content").iterator map { _.text } reduce { _ + "\n\n" + _ }
+  def solved = (
+    new java.io.File("src/main/scala/euler/").listFiles.map {
+      f => """(?<=Problem)\d+(?=\.scala)""".r.findFirstIn(f.getName)
+    }
+    filter { _.isDefined }
+    map    {
+      case Some(a) => a.toInt
+      case None    => 0
+    }
+  ).sorted.distinct
 
-      println(s" $title $number $description ")
+  def setup(n: Int) = {
+    val doc  = Jsoup.connect(uri(n)).get
+    val vars = Map(
+      "title"       -> doc.select("#content h2").first.text,
+      "n"           -> doc.select("#content h3").first.text.substring(8).toInt.toString,
+      "description" -> (doc.select("#content .problem_content").iterator map { _.text } reduce { _ + "\n\n" + _ })
+    )
+    Template.process("src/main/resources/Problem.scala", s"src/main/scala/euler/Problem$n.scala", vars)
   }
 
 }
