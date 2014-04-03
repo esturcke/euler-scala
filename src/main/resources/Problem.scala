@@ -1,22 +1,22 @@
 package euler
 
 /**
- * '''@title'''
+ * '''{title}'''
  *
- * [[http://projecteuler.net/problem=@n Project Euler Problem @n]]
+ * [[http://projecteuler.net/problem={n} Project Euler Problem {n}]]
  *
- * @description
+ * {description}
  *
  * '''Solution'''
  *
  */
 
-object Problem@n extends Problem {
+object Problem{n} extends Problem {
 
-  def id    = @n
-  def title = "@title"
+  def id    = {n}
+  def title = "{title}"
 
-  /** Returns ... */
-  def solve = ...
+  /** Returns ??? */
+  def solve = ???
 
 }
